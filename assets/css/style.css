@@ -14,7 +14,7 @@
   background-color: var(--secondary);
 }
 
-h1, p {
+h1, h2, p {
   margin-bottom: 1rem;
   background-color: var(--tertiary);
   font-size: 5.4rem;
@@ -37,6 +37,7 @@ h1 {
   max-width: 80rem;
   margin: 0 auto;
   border-radius: 45px;
+  padding: 2 rem;
 }
 
 .container > * {
@@ -95,4 +96,24 @@ h1 {
 
 .home {
   background-color: var(--tertiary);
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  border: none;
+  box-shadow: 0 0.1rem 1.4rem 0 rgb(44, 43, 43, 0.5);
+}
+
+input::placeholder {
+  color: #aaa;
 }
