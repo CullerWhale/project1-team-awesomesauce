@@ -5,22 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia Quiz</title>
-    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
  <!-- current class names are placeholders and will be changed -->
 <body>
-    <header>
-      <h1 id="highscore"><a href="#high-scores">View high scores</a></h1>
-    </header>
-
-    <div id="container">
-        <section id="intro">Trivia Time!
-          <p></p>
-          <button class="btnOption" id="0">Start Quiz</button>
+    <div class="container">
+        <section id="home" class="flex-center flex-column">
+          <h1>Trivia Time!</h1>
+          <p>The enthusiasm and confidence you bring to Trivia Games is rivaled only by the impressive consistency with which you are always wrong. Lol, do you have what it takes to win? Click Start to find out!</p>
+          <a class="btn" href="/game.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html" >View high scores</a>
         </section>
         
-        <section id="questionsection" class="hidden">
+        <!-- <section id="questionsection" class="hidden">
           <div id="question"></div>
           <div class="options">
             <button class="btnOption" data-button-id="1" onclick="checkAnswer('1')"></button>
@@ -44,7 +42,7 @@
         </section>
       </div>
 
-      <div id="correct-wrong-info" class="centered" style="display:none"></div>
+      <div id="correct-wrong-info" class="centered" style="display:none"></div> -->
 
       <script src="./assets/script.js"></script>
     </body>
