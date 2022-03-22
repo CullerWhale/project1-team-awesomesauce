@@ -25,6 +25,39 @@ var ourQuestions = [
 
 ];
 
+
+//combine incorrect and correct answers 
+a = ourQuestions[0].correct_answer;
+console.log(a);
+b = ourQuestions[0].incorrect_answers;
+
+c = b.concat([a]);
+console.log(c);
+
+//fail to put that into a loop
+function possibleAnswers() {
+    for (let i = 0; i < ourQuestions.length; i++) {
+        var correctAnswer = ourQuestions[i].correct_answer;
+        var incorrectAnswer = ourQuestions[i].incorrect_answers;
+        var combinedAnswers = incorrectAnswer.concat([correctAnswer]);
+
+        
+        // ourQuestions = ourQuestions.concat(combinedAnswers);
+        ourQuestions.concat(combinedAnswers);
+        console.log(ourQuestions[i]);
+
+        //very close:
+        // var combinedAnswers = ourQuestions[i].correct_answer.concat([ourQuestions[i].incorrect_answers]);
+        // console.log(combinedAnswers)
+    }
+}
+
+possibleAnswers();
+
+
+
+
+
 //Connect to empty question div and answer div
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
@@ -35,20 +68,52 @@ function renderQuestion () {
     var currentQuestion = document.createElement('div');
     currentQuestion.textContent = ourQuestions[j].question;
     questions.appendChild(currentQuestion);
-    alert('Noice');
-
-    // for (let i = 0; i < ourQuestions[j].question.length; i++) {
-    //     var questionEl = document.getElementById("question");
-    //     questionEl.textContent = ourQuestions[j].question
-
-        // var quest = questions.question[i].textContent;
-        // questionEl.textContent = quest; 
-        // console.log(quest);
-    // }
+    //for loop?
+    alert('Good Luck!');    
 
 }
 
 renderQuestion();
+
+
+//put incorrect and correct answers together? 
+function combineAnswers() {
+    
+    for (let i = 0; i < ourQuestions.length; i++) {
+        var incorrectAnswers  = ourQuestions[i].incorrect_answers;
+        // var correctAnswer = ourQuestions[i].correct_answer;
+        // var allAnswers = incorrectAnswers.push(ourQuestions[i].correct_answer);
+        incorrectAnswers.push(ourQuestions[i].correct_answer);
+        
+    }
+    
+    // console.log(allAnswers);
+    // console.log(incorrectAnswers);
+    // console.log(ourQuestions);
+
+}
+
+combineAnswers();
+
+
+//render possible answers
+// function renderAnswers() {
+//     j=0;
+//     for (var i=0; i< ourQuestions.length; i++) {
+//         var answers = document.createElement('button');
+//         answers.textContent = ourQuestions[j].answers[i];
+//         //possibleAnswers.appendChild(answers);
+//         // console.log(possibleAnswers);
+//         // answers.addEventListener('click', function () {
+
+//         // })
+//     }
+
+
+    
+// }
+
+// renderAnswers();
 
 //constants
 const CORRECT_BONUS = 10;
@@ -65,6 +130,7 @@ startGame = () => {
  // rest of function  
 //   getNewQuestion();
     renderQuestion();
+    renderAnswers();
 };
 
 // getNewQuestion = () => {
