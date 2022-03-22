@@ -106,6 +106,10 @@ var answerList = document.querySelector("#answers");
 //     alert('Success!');
 // });
 
+//global variable for next question
+var lastQuestion = ourQuestions.length - 1;
+// var currerentQuestion = ??? already used. 
+var thisQuestion = 0 ; 
 
 //render possible answers
 function renderPossibleAnswers() {
@@ -115,7 +119,6 @@ function renderPossibleAnswers() {
         var answers = document.createElement('button');
         answers.textContent = ourQuestions[j].incorrect_answers[i];
         answerList.appendChild(answers);
-        
 
         answers.addEventListener("click", function () {
             //check that button works 
@@ -130,15 +133,10 @@ function renderPossibleAnswers() {
               gif.src = "./assets/rommel.jpg"
               document.body.appendChild(gif);
 
-
               //go to next question
               var nextQuestionBtn = document.createElement('button');
               document.body.appendChild(nextQuestionBtn);
               nextQuestionBtn.textContent = 'Next Question';
-
-
-
-              
 
               //add event listener for next question
               nextQuestionBtn.addEventListener('click', function() {
@@ -150,13 +148,34 @@ function renderPossibleAnswers() {
                 j++;
                 i++;
                 // nextQuestion();
+                var newNextQuestionBtn = document.createElement('div');
+                document.body.appendChild(newNextQuestionBtn);
+                newNextQuestionBtn.textContent = ourQuestions[j].question;
+
+                if (ourQuestions < lastQuestion) {
+                    thisQuestion++; 
+                    
+                    // nextQuestion();
+                    // renderQuestion(); not hooked up to lastQuestion
+                }
                 var next = document.createElement('button');
                 next.textContent = 'test';
                 // next.textContent = ourQuestions[j].incorrect_answers[i];
                 answerList.appendChild(next);
-                //final fail. 
+                //new attempt
 
 
+
+
+
+
+
+            
+
+                //new attempt
+
+                // f(x)? renderquestion
+                let q = ourQuestions[thisQuestion];
 
                 // how?! nextQuestion();
                 
