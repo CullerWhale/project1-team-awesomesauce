@@ -1,4 +1,4 @@
-var question = document.getElementById("question");
+var questionEl = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const questionCounterText = document.getElementById('questionCounter');
 const scoreText = document.getElementById('score');
@@ -11,9 +11,30 @@ let availableQuestions = [];
 
 var questions = [
     {question : "Who is the best teacher?", 
-possibleAnswers : ["Bruce Willis", "Nicholas Cage", "Rommel Villagomez", "Michelle Pfeiffer"], 
-correctAnswer : 3}
+    incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
+    correct_answer : "Rommel Villagomez" }, 
+
+    {question : "Who is the best TA?", 
+    incorrect_answers : ["Arnold Schwarzenegger", "Sylvester Stallone", "Jackie Chan"], 
+    correct_answer : "Colin Goodale" }, 
+
+    {question : "Another question?", 
+    incorrect_answers : ["Yes! Great idea!", "No!", "Maybe"], 
+    correct_answer : "Splunge" } 
+
+
 ];
+
+
+function renderQuestion () {
+    for (let i = 0; i < questions.length; i++) {
+        var quest = questions.question[i];
+        questionEl.textContent = quest; 
+        
+    }
+
+}
+
 
 //constants
 const CORRECT_BONUS = 10;
@@ -24,12 +45,13 @@ var checkAnswer = function(answer) {
 };
 
 
-// startGame = () => {
-//   questionCounter = 0;
-//   score = 0;
-//  // rest of function  
+startGame = () => {
+  questionCounter = 0;
+  score = 0;
+ // rest of function  
 //   getNewQuestion();
-// };
+    
+};
 
 // getNewQuestion = () => {
 
