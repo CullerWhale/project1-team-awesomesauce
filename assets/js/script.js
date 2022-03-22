@@ -1,4 +1,4 @@
-var questionEl = document.getElementById("question");
+// var questionEl = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const questionCounterText = document.getElementById('questionCounter');
 const scoreText = document.getElementById('score');
@@ -9,7 +9,7 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
-var questions = [
+var ourQuestions = [
     {question : "Who is the best teacher?", 
     incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
     correct_answer : "Rommel Villagomez" }, 
@@ -25,16 +25,30 @@ var questions = [
 
 ];
 
+//Connect to empty question div and answer div
+var questions = document.querySelector("#question");
+var possibleAnswers = document.querySelector("#answers");
+var j = 0;
 
+//insert our questions 
 function renderQuestion () {
-    for (let i = 0; i < questions.length; i++) {
-        var quest = questions.question[i];
-        questionEl.textContent = quest; 
-        
-    }
+    var currentQuestion = document.createElement('div');
+    currentQuestion.textContent = ourQuestions[j].question;
+    questions.appendChild(currentQuestion);
+    alert('Noice');
+
+    // for (let i = 0; i < ourQuestions[j].question.length; i++) {
+    //     var questionEl = document.getElementById("question");
+    //     questionEl.textContent = ourQuestions[j].question
+
+        // var quest = questions.question[i].textContent;
+        // questionEl.textContent = quest; 
+        // console.log(quest);
+    // }
 
 }
 
+renderQuestion();
 
 //constants
 const CORRECT_BONUS = 10;
@@ -50,7 +64,7 @@ startGame = () => {
   score = 0;
  // rest of function  
 //   getNewQuestion();
-    
+    renderQuestion();
 };
 
 // getNewQuestion = () => {
