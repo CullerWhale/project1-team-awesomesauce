@@ -26,6 +26,27 @@ var ourQuestions = [
 ];
 
 
+
+//Connect to empty question div and answer div
+var questions = document.querySelector("#question");
+var possibleAnswers = document.querySelector("#answers");
+var j = 0;
+
+//insert our questions 
+function renderQuestion () {
+    var currentQuestion = document.createElement('div');
+    currentQuestion.textContent = ourQuestions[j].question;
+    questions.appendChild(currentQuestion);
+    //for loop?
+    alert('Good Luck!');    
+
+}
+
+renderQuestion();
+
+
+
+
 //combine incorrect and correct answers on a single basis
 a = ourQuestions[0].correct_answer;
 console.log(a);
@@ -52,27 +73,6 @@ function possibleAnswers() {
 }
 
 // possibleAnswers();
-
-
-
-
-
-//Connect to empty question div and answer div
-var questions = document.querySelector("#question");
-var possibleAnswers = document.querySelector("#answers");
-var j = 0;
-
-//insert our questions 
-function renderQuestion () {
-    var currentQuestion = document.createElement('div');
-    currentQuestion.textContent = ourQuestions[j].question;
-    questions.appendChild(currentQuestion);
-    //for loop?
-    alert('Good Luck!');    
-
-}
-
-renderQuestion();
 
 
 //put correct and incorrect answers together. WARNING: this forces us to use the logic (user selected answer == correct_answer) to check if answer was correct  since incorrect_answer now includes correct_answer 
@@ -119,7 +119,7 @@ function renderPossibleAnswers() {
 
         answers.addEventListener("click", function () {
             //check that button works 
-            alert('Success!');
+            // alert('Success!');
             
             //check if the selected answer was correct. 
             console.log(this.textContent);
@@ -129,62 +129,122 @@ function renderPossibleAnswers() {
               var gif = document.createElement('img');
               gif.src = "./assets/rommel.jpg"
               document.body.appendChild(gif);
-            //   questions.innerHTML = '';
-            //   possibleAnswers.innerHTML = '';
-            //   x++;
-            //   timerEl.textContent = timeLeft;
-            //   nextQuestion(x);
-            } 
-            //      else {
-            //   console.log('question is wrong');
-            //   timeLeft -= 20;
-            //   timerEl.textContent = timeLeft;
-            //   x++;
-            //   questions.innerHTML = '';
-            //   possibleAnswers.innerHTML = '';
-            //   nextQuestion(x);
-        });
 
-      
-        
+
+              //go to next question
+              var nextQuestionBtn = document.createElement('button');
+              document.body.appendChild(nextQuestionBtn);
+              nextQuestionBtn.textContent = 'Next Question';
+
+
+
+              
+
+              //add event listener for next question
+              nextQuestionBtn.addEventListener('click', function() {
+                alert('Success!');
+                document.body.removeChild(gif);
+                document.body.removeChild(nextQuestionBtn);
+                document.body.removeChild(answerList);
+                document.body.removeChild(questions);
+                j++;
+                i++;
+                // nextQuestion();
+                var next = document.createElement('button');
+                next.textContent = 'test';
+                // next.textContent = ourQuestions[j].incorrect_answers[i];
+                answerList.appendChild(next);
+                //final fail. 
+
+
+
+                // how?! nextQuestion();
+                
+                // how?! renderQuestion(j);
+
+                //Fail
+                // var newQuestion = document.createElement('div');
+                // newQuestion.textContent = ourQuestions[i].question;
+                // questions.appendChild(newQuestion);
+              });
+              
+            } 
+        });
     };
 };
 renderPossibleAnswers();
 
-console.log(this,textContent);
-//check if user clicked the right answer
-function checkAnswer() {
+
+
+
+
+//redo
+
+//Connect to empty question div and answer div
+var questions = document.querySelector("#question");
+var possibleAnswers = document.querySelector("#answers");
+// var j = 0;
+
+
+function nextQuestion(j) {
+    for (var i = 0; i < ourQuestions[j].incorrect_answers.length; i++) {
+        //create a button for each possible answer 
+        var answers = document.createElement('button');
+        answers.textContent = ourQuestions[j].incorrect_answers[i];
+        answerList.appendChild(answers);
+
+        
+//one way to insert our question
+    // var currentQuestion = document.createElement('div');
+    // currentQuestion.textContent = ourQuestions[j].question;
+    // questions.appendChild(currentQuestion);
 
 
 }
 
 
+//loop through questions fail 
+
+// console.log(ourQuestions);
+// function nextQuestion() {
+//     console.log(ourQuestions.length);
 
 
+//     for (let i = 0; i < ourQuestions.length; i++) {
+//         const currentQuestion = ourQuestions[i+1];
+        //HOW?! renderQuestion();
 
+        // var nextQuestion = document.createElement('div');
+        // nextQuestion.textContent = ourQuestions[j].question;
+        // questions.appendChild(nextQuestion);
+}
 
-
-
-
-
-
-
-
-//older attempt
-// function renderAnswers() {
-//     j=0;
-//     for (var i=0; i< ourQuestions.length; i++) {
-//         var answers = document.createElement('button');
-//         answers.textContent = ourQuestions[j].answers[i];
-//         //possibleAnswers.appendChild(answers);
-//         // console.log(possibleAnswers);
-//         // answers.addEventListener('click', function () {
-
-//         // })
-//     }
 // }
 
-// renderAnswers();
+
+
+
+
+
+
+
+
+
+
+startGame = () => {
+    questionCounter = 0;
+    score = 0;
+   // rest of function  
+  //   getNewQuestion();
+      renderQuestion();
+      renderAnswers();
+      
+  };
+
+
+
+// older work 
+
 
 //constants
 const CORRECT_BONUS = 10;
@@ -194,16 +254,6 @@ var checkAnswer = function(answer) {
   if (answer == "3") {}
 };
 
-
-startGame = () => {
-  questionCounter = 0;
-  score = 0;
- // rest of function  
-//   getNewQuestion();
-    renderQuestion();
-    renderAnswers();
-    
-};
 
 // getNewQuestion = () => {
 
