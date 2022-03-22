@@ -9,7 +9,11 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
-let questions = [];
+var questions = [
+    {question : "Who is the best teacher?", 
+possibleAnswers : ["Bruce Willis", "Nicholas Cage", "Rommel Villagomez", "Michelle Pfeiffer"], 
+correctAnswer : 3}
+];
 
 //constants
 const CORRECT_BONUS = 10;
