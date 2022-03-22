@@ -26,7 +26,7 @@ var ourQuestions = [
 ];
 
 
-//combine incorrect and correct answers 
+//combine incorrect and correct answers on a single basis
 a = ourQuestions[0].correct_answer;
 console.log(a);
 b = ourQuestions[0].incorrect_answers;
@@ -34,14 +34,13 @@ b = ourQuestions[0].incorrect_answers;
 c = b.concat([a]);
 console.log(c);
 
-//fail to put that into a loop
+//fail to put that into a loop?
 function possibleAnswers() {
     for (let i = 0; i < ourQuestions.length; i++) {
         var correctAnswer = ourQuestions[i].correct_answer;
         var incorrectAnswer = ourQuestions[i].incorrect_answers;
         var combinedAnswers = incorrectAnswer.concat([correctAnswer]);
-
-        
+    
         // ourQuestions = ourQuestions.concat(combinedAnswers);
         ourQuestions.concat(combinedAnswers);
         // console.log(ourQuestions[i]);
@@ -76,7 +75,7 @@ function renderQuestion () {
 renderQuestion();
 
 
-//put incorrect and correct answers together? 
+//put correct and incorrect answers together. WARNING: this forces us to use the logic (user selected answer == correct_answer) to check if answer was correct  since incorrect_answer now includes correct_answer 
 function combineAnswers() {
     
     for (let i = 0; i < ourQuestions.length; i++) {
@@ -121,8 +120,15 @@ function renderPossibleAnswers() {
         });
     };
 };
-
 renderPossibleAnswers();
+
+
+//check if user clicked the right answer
+function checkAnswer() {
+
+
+}
+
 
 
 
@@ -147,9 +153,6 @@ renderPossibleAnswers();
 
 //         // })
 //     }
-
-
-    
 // }
 
 // renderAnswers();
