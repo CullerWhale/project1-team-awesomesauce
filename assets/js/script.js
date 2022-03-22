@@ -1,4 +1,4 @@
-var questionEl = document.getElementById("question");
+// var questionEl = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const questionCounterText = document.getElementById('questionCounter');
 const scoreText = document.getElementById('score');
@@ -9,7 +9,7 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
-var questions = [
+var ourQuestions = [
     {question : "Who is the best teacher?", 
     incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
     correct_answer : "Rommel Villagomez" }, 
@@ -26,15 +26,165 @@ var questions = [
 ];
 
 
-function renderQuestion () {
-    for (let i = 0; i < questions.length; i++) {
-        var quest = questions.question[i];
-        questionEl.textContent = quest; 
-        
+//combine incorrect and correct answers on a single basis
+a = ourQuestions[0].correct_answer;
+console.log(a);
+b = ourQuestions[0].incorrect_answers;
+
+c = b.concat([a]);
+console.log(c);
+
+//fail to put that into a loop?
+function possibleAnswers() {
+    for (let i = 0; i < ourQuestions.length; i++) {
+        var correctAnswer = ourQuestions[i].correct_answer;
+        var incorrectAnswer = ourQuestions[i].incorrect_answers;
+        var combinedAnswers = incorrectAnswer.concat([correctAnswer]);
+    
+        // ourQuestions = ourQuestions.concat(combinedAnswers);
+        ourQuestions.concat(combinedAnswers);
+        // console.log(ourQuestions[i]);
+
+        //very close:
+        // var combinedAnswers = ourQuestions[i].correct_answer.concat([ourQuestions[i].incorrect_answers]);
+        // console.log(combinedAnswers)
     }
+}
+
+// possibleAnswers();
+
+
+
+
+
+//Connect to empty question div and answer div
+var questions = document.querySelector("#question");
+var possibleAnswers = document.querySelector("#answers");
+var j = 0;
+
+//insert our questions 
+function renderQuestion () {
+    var currentQuestion = document.createElement('div');
+    currentQuestion.textContent = ourQuestions[j].question;
+    questions.appendChild(currentQuestion);
+    //for loop?
+    alert('Good Luck!');    
 
 }
 
+renderQuestion();
+
+
+//put correct and incorrect answers together. WARNING: this forces us to use the logic (user selected answer == correct_answer) to check if answer was correct  since incorrect_answer now includes correct_answer 
+function combineAnswers() {
+    
+    for (let i = 0; i < ourQuestions.length; i++) {
+        var incorrectAnswers  = ourQuestions[i].incorrect_answers;
+        // var correctAnswer = ourQuestions[i].correct_answer;
+        // var allAnswers = incorrectAnswers.push(ourQuestions[i].correct_answer);
+        incorrectAnswers.push(ourQuestions[i].correct_answer);
+        
+    }
+    
+    // console.log(allAnswers);
+    // console.log(incorrectAnswers);
+    // console.log(ourQuestions);
+
+}
+
+combineAnswers();
+
+
+//render answers
+var answerList = document.querySelector("#answers");
+
+//render one answer button
+// var answer1= document.createElement('button');
+// answer1.textContent = ourQuestions[0].incorrect_answers[0]; 
+// answerList.appendChild(answer1);
+// answer1.addEventListener('click', function() {
+//     alert('Success!');
+// });
+
+
+//render possible answers
+function renderPossibleAnswers() {
+    j = 0;
+    for (var i = 0; i < ourQuestions[j].incorrect_answers.length; i++) {
+        //create a button for each possible answer 
+        var answers = document.createElement('button');
+        answers.textContent = ourQuestions[j].incorrect_answers[i];
+        answerList.appendChild(answers);
+        
+
+        answers.addEventListener("click", function () {
+            //check that button works 
+            alert('Success!');
+            
+            //check if the selected answer was correct. 
+            console.log(this.textContent);
+            // console.log(ourQuestions);
+            if (this.textContent == ourQuestions[j].correct_answer) {
+              console.log('question is correct');
+              var gif = document.createElement('img');
+              gif.src = "./assets/rommel.jpg"
+              document.body.appendChild(gif);
+            //   questions.innerHTML = '';
+            //   possibleAnswers.innerHTML = '';
+            //   x++;
+            //   timerEl.textContent = timeLeft;
+            //   nextQuestion(x);
+            } 
+            //      else {
+            //   console.log('question is wrong');
+            //   timeLeft -= 20;
+            //   timerEl.textContent = timeLeft;
+            //   x++;
+            //   questions.innerHTML = '';
+            //   possibleAnswers.innerHTML = '';
+            //   nextQuestion(x);
+        });
+
+      
+        
+    };
+};
+renderPossibleAnswers();
+
+console.log(this,textContent);
+//check if user clicked the right answer
+function checkAnswer() {
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//older attempt
+// function renderAnswers() {
+//     j=0;
+//     for (var i=0; i< ourQuestions.length; i++) {
+//         var answers = document.createElement('button');
+//         answers.textContent = ourQuestions[j].answers[i];
+//         //possibleAnswers.appendChild(answers);
+//         // console.log(possibleAnswers);
+//         // answers.addEventListener('click', function () {
+
+//         // })
+//     }
+// }
+
+// renderAnswers();
 
 //constants
 const CORRECT_BONUS = 10;
@@ -50,6 +200,8 @@ startGame = () => {
   score = 0;
  // rest of function  
 //   getNewQuestion();
+    renderQuestion();
+    renderAnswers();
     
 };
 
