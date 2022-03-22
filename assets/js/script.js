@@ -119,7 +119,7 @@ function renderPossibleAnswers() {
 
         answers.addEventListener("click", function () {
             //check that button works 
-            alert('Success!');
+            // alert('Success!');
             
             //check if the selected answer was correct. 
             console.log(this.textContent);
@@ -129,31 +129,32 @@ function renderPossibleAnswers() {
               var gif = document.createElement('img');
               gif.src = "./assets/rommel.jpg"
               document.body.appendChild(gif);
-            //   questions.innerHTML = '';
-            //   possibleAnswers.innerHTML = '';
-            //   x++;
-            //   timerEl.textContent = timeLeft;
-            //   nextQuestion(x);
-            } 
-            //      else {
-            //   console.log('question is wrong');
-            //   timeLeft -= 20;
-            //   timerEl.textContent = timeLeft;
-            //   x++;
-            //   questions.innerHTML = '';
-            //   possibleAnswers.innerHTML = '';
-            //   nextQuestion(x);
-        });
 
-      
-        
+
+              //go to next question
+              var nextQuestionBtn = document.createElement('button');
+              document.body.appendChild(nextQuestionBtn);
+              nextQuestionBtn.textContent = 'Next Question';
+
+              //add event listener for next question
+              nextQuestionBtn.addEventListener('click', function() {
+                alert('Success!');
+                document.body.removeChild(gif);
+                document.body.removeChild(nextQuestionBtn);
+                document.body.removeChild(answerList);
+                document.body.removeChild(questions);
+
+              });
+              
+            } 
+        });
     };
 };
 renderPossibleAnswers();
 
-console.log(this,textContent);
-//check if user clicked the right answer
-function checkAnswer() {
+
+
+function nextQuestion() {
 
 
 }
@@ -168,23 +169,20 @@ function checkAnswer() {
 
 
 
+startGame = () => {
+    questionCounter = 0;
+    score = 0;
+   // rest of function  
+  //   getNewQuestion();
+      renderQuestion();
+      renderAnswers();
+      
+  };
 
 
-//older attempt
-// function renderAnswers() {
-//     j=0;
-//     for (var i=0; i< ourQuestions.length; i++) {
-//         var answers = document.createElement('button');
-//         answers.textContent = ourQuestions[j].answers[i];
-//         //possibleAnswers.appendChild(answers);
-//         // console.log(possibleAnswers);
-//         // answers.addEventListener('click', function () {
 
-//         // })
-//     }
-// }
+// older work 
 
-// renderAnswers();
 
 //constants
 const CORRECT_BONUS = 10;
@@ -194,16 +192,6 @@ var checkAnswer = function(answer) {
   if (answer == "3") {}
 };
 
-
-startGame = () => {
-  questionCounter = 0;
-  score = 0;
- // rest of function  
-//   getNewQuestion();
-    renderQuestion();
-    renderAnswers();
-    
-};
 
 // getNewQuestion = () => {
 
