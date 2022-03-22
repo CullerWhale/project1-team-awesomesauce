@@ -15,6 +15,9 @@ let questions = [];
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 20;
 
+var checkAnswer = function(answer) {
+  if (answer == "3") {}
+};
 
 
 // startGame = () => {
