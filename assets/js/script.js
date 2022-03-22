@@ -44,7 +44,7 @@ function possibleAnswers() {
         
         // ourQuestions = ourQuestions.concat(combinedAnswers);
         ourQuestions.concat(combinedAnswers);
-        console.log(ourQuestions[i]);
+        // console.log(ourQuestions[i]);
 
         //very close:
         // var combinedAnswers = ourQuestions[i].correct_answer.concat([ourQuestions[i].incorrect_answers]);
@@ -52,7 +52,7 @@ function possibleAnswers() {
     }
 }
 
-possibleAnswers();
+// possibleAnswers();
 
 
 
@@ -96,7 +96,46 @@ function combineAnswers() {
 combineAnswers();
 
 
+//render answers
+var answerList = document.querySelector("#answers");
+
+//render one answer button
+// var answer1= document.createElement('button');
+// answer1.textContent = ourQuestions[0].incorrect_answers[0]; 
+// answerList.appendChild(answer1);
+// answer1.addEventListener('click', function() {
+//     alert('Success!');
+// });
+
+
 //render possible answers
+function renderPossibleAnswers() {
+    j = 0;
+    for (var i = 0; i < ourQuestions[j].incorrect_answers.length; i++) {
+
+        var answers = document.createElement('button');
+        answers.textContent = ourQuestions[j].incorrect_answers[i];
+        answerList.appendChild(answers);
+        answers.addEventListener("click", function () {
+            alert('Success!');
+        });
+    };
+};
+
+renderPossibleAnswers();
+
+
+
+
+
+
+
+
+
+
+
+
+//older attempt
 // function renderAnswers() {
 //     j=0;
 //     for (var i=0; i< ourQuestions.length; i++) {
@@ -131,6 +170,7 @@ startGame = () => {
 //   getNewQuestion();
     renderQuestion();
     renderAnswers();
+    
 };
 
 // getNewQuestion = () => {
