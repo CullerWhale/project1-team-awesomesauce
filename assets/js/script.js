@@ -152,10 +152,17 @@ function renderPossibleAnswers() {
                 document.body.appendChild(newQuestion);
                 newQuestion.textContent = ourQuestions[j].question;
 
+                var somethingElse = document.createElement('button');
+                    somethingElse.textContent = ourQuestions[j].correct_answer;
+                    document.body.appendChild(somethingElse);
+                    
                 for (let i = 0; i < ourQuestions.length; i++) {
                     var something = document.createElement('button');
-                    something.textContent = 'hello there';
+                    something.textContent = ourQuestions[j].incorrect_answers[i];
                     document.body.appendChild(something);
+
+                    
+
                 }
 
                 // ourQuestions[j].incorrect_answers[i]
