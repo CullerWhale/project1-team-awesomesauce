@@ -111,18 +111,47 @@ var answerList = document.querySelector("#answers");
 function renderPossibleAnswers() {
     j = 0;
     for (var i = 0; i < ourQuestions[j].incorrect_answers.length; i++) {
-
+        //create a button for each possible answer 
         var answers = document.createElement('button');
         answers.textContent = ourQuestions[j].incorrect_answers[i];
         answerList.appendChild(answers);
+        
+
         answers.addEventListener("click", function () {
+            //check that button works 
             alert('Success!');
+            
+            //check if the selected answer was correct. 
+            console.log(this.textContent);
+            // console.log(ourQuestions);
+            if (this.textContent == ourQuestions[j].correct_answer) {
+              console.log('question is correct');
+              var gif = document.createElement('img');
+              gif.src = "./assets/rommel.jpg"
+              document.body.appendChild(gif);
+            //   questions.innerHTML = '';
+            //   possibleAnswers.innerHTML = '';
+            //   x++;
+            //   timerEl.textContent = timeLeft;
+            //   nextQuestion(x);
+            } 
+            //      else {
+            //   console.log('question is wrong');
+            //   timeLeft -= 20;
+            //   timerEl.textContent = timeLeft;
+            //   x++;
+            //   questions.innerHTML = '';
+            //   possibleAnswers.innerHTML = '';
+            //   nextQuestion(x);
         });
+
+      
+        
     };
 };
 renderPossibleAnswers();
 
-
+console.log(this,textContent);
 //check if user clicked the right answer
 function checkAnswer() {
 
