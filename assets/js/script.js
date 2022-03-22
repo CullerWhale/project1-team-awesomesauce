@@ -137,7 +137,7 @@ function renderPossibleAnswers() {
               var nextQuestionBtn = document.createElement('button');
               document.body.appendChild(nextQuestionBtn);
               nextQuestionBtn.textContent = 'Next Question';
-
+//new function???
               //add event listener for next question
               nextQuestionBtn.addEventListener('click', function() {
                 alert('Success!');
@@ -148,9 +148,18 @@ function renderPossibleAnswers() {
                 j++;
                 i++;
                 // nextQuestion();
-                var newNextQuestionBtn = document.createElement('div');
-                document.body.appendChild(newNextQuestionBtn);
-                newNextQuestionBtn.textContent = ourQuestions[j].question;
+                var newQuestion = document.createElement('div');
+                document.body.appendChild(newQuestion);
+                newQuestion.textContent = ourQuestions[j].question;
+
+                for (let i = 0; i < ourQuestions.length; i++) {
+                    var something = document.createElement('button');
+                    something.textContent = 'hello there';
+                    document.body.appendChild(something);
+                }
+
+                // ourQuestions[j].incorrect_answers[i]
+                
 
                 if (ourQuestions < lastQuestion) {
                     thisQuestion++; 
