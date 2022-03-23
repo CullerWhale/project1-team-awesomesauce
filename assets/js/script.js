@@ -24,7 +24,7 @@ var ourQuestions = [
     {question : "Another question?", 
     incorrect_answers : ["Yes! Great idea!", "No!", "Maybe"], 
     correct_answer : "Splunge",
-    imageSRC: "./assets/colin.jpg" } 
+    imageSRC: "./assets/splunge.jpg" } 
 
 
 ];
@@ -64,8 +64,7 @@ function renderQuestion () {
     var currentQuestion = document.createElement('div');
     currentQuestion.textContent = ourQuestions[questionCounter].question;
     questions.appendChild(currentQuestion);
-    //for loop?
-    alert('Good Luck!');    
+    //for loop?  
 
 }
 
