@@ -91,7 +91,7 @@ mainClickHandler = function(event) {
 function renderQuestion () {
     var currentQuestion = document.createElement('div');
     // make the text content of the new div be the question prompt for the current question
-    currentQuestion.textContent = ourQuestions[questionCounter].question;
+    currentQuestion.innerHTML = ourQuestions[questionCounter].question;
     // questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
     //for loop?  
