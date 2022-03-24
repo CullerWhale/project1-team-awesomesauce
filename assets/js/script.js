@@ -44,16 +44,13 @@ var questionCounter = 0;
 
 // ];
 
+
 mainClickHandler = function(event) {
     event.preventDefault();
 
     targetEl = event.target;
 
-    if (targetEl.matches("#start-quiz")) {
-        startQuiz();
-        
-    }
-    else if (targetEl.matches(".choice-text")){
+    if (targetEl.matches(".choice-text")){
         var answerText = targetEl.textContent;
         checkAnswer(answerText);
     }
@@ -80,7 +77,6 @@ function renderQuestion () {
     currentQuestion.textContent = ourQuestions[questionCounter].question;
     questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
-    combineAnswers();
     //for loop?  
 
 }
@@ -152,6 +148,7 @@ startQuiz = function() {
 
                 ourQuestions = data.results;
                 console.log(ourQuestions[0].question);
+                combineAnswers();
                 renderQuestion();
                 renderPossibleAnswers();
 
@@ -170,6 +167,8 @@ startQuiz = function() {
       
       
 };
+
+startQuiz();
 
 document.addEventListener("click", mainClickHandler);
 
