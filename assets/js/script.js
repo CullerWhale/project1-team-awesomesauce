@@ -1,21 +1,13 @@
 const questionsAPI = 10;
 var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
-// 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
+'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
-fetch(apiUrl).then(function(response) {
-  // console.log(response);
-  if (response.ok) {
-    response.json().then(function(data){
-      console.log(data);
-    });
-  }
-  else {
 
-  }
-}
+var ourQuestions = [];
 
-)
+
+
 
 // var questionEl = document.getElementById("question");
 // const choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -29,30 +21,31 @@ var questionCounter = 0;
 // var availableQuestions = [];
 
 // remove the imageSRC property from this when we add code to call GIPHY API
-var ourQuestions = [
-    {question : "Who is the best teacher?", 
-    incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
-    correct_answer : "Rommel Villagomez",
-    imageSRC: "./assets/rommel.jpg" }, 
+// var ourQuestions = [
+//     {question : "Who is the best teacher?", 
+//     incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
+//     correct_answer : "Rommel Villagomez",
+//     imageSRC: "./assets/rommel.jpg" }, 
 
-    {question : "Who is the best TA?", 
-    incorrect_answers : ["Arnold Schwarzenegger", "Sylvester Stallone", "Jackie Chan"], 
-    correct_answer : "Colin Goodale",
-    imageSRC: "./assets/colin.jpg" }, 
+//     {question : "Who is the best TA?", 
+//     incorrect_answers : ["Arnold Schwarzenegger", "Sylvester Stallone", "Jackie Chan"], 
+//     correct_answer : "Colin Goodale",
+//     imageSRC: "./assets/colin.jpg" }, 
 
-    {question : "Another question?", 
-    incorrect_answers : ["Yes! Great idea!", "No!", "Maybe"], 
-    correct_answer : "Splunge",
-    imageSRC: "./assets/splunge.jpg" } 
+//     {question : "Another question?", 
+//     incorrect_answers : ["Yes! Great idea!", "No!", "Maybe"], 
+//     correct_answer : "Splunge",
+//     imageSRC: "./assets/splunge.jpg" } 
 
 
-];
+// ];
 
 mainClickHandler = function(event) {
     targetEl = event.target;
 
     if (targetEl.matches("#start-quiz")) {
         startQuiz();
+        
     }
     else if (targetEl.matches(".choice-text")){
         var answerText = targetEl.textContent;
@@ -102,6 +95,8 @@ function combineAnswers() {
 
 combineAnswers();
 
+
+
 function checkAnswer(answerText) {
     if (answerText == ourQuestions[questionCounter].correct_answer) {
         console.log('question is correct');
@@ -139,10 +134,31 @@ renderPossibleAnswers();
 startGame = function() {
     questionCounter = 0;
     score = 0;
-   // rest of function  
+    // rest of function  
+
+    //fetch api
+    fetch(apiUrl).then(function (response) {
+        // console.log(response);
+        if (response.ok) {
+            response.json().then(function (data) {
+
+                ourQuestions = data;
+                renderQuestion();
+                renderAnswers();
+
+                
+            });
+        }
+        else {
+
+        }
+    }
+
+    )
+
+
   //   getNewQuestion();
-      renderQuestion();
-      renderAnswers();
+      
       
 };
 
