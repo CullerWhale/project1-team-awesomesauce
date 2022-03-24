@@ -6,6 +6,10 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
 var ourQuestions = [];
 
+//Connect to empty question div and answer div
+var questions = document.querySelector("#question");
+var possibleAnswers = document.querySelector("#answers");
+var gifContainerEl = document.querySelector("#gif-page");
 
 
 
@@ -41,6 +45,8 @@ var questionCounter = 0;
 // ];
 
 mainClickHandler = function(event) {
+    event.preventDefault();
+
     targetEl = event.target;
 
     if (targetEl.matches("#start-quiz")) {
@@ -66,21 +72,20 @@ mainClickHandler = function(event) {
     }
 }
 
-//Connect to empty question div and answer div
-var questions = document.querySelector("#question");
-var possibleAnswers = document.querySelector("#answers");
-var gifContainerEl = document.querySelector("#gif-page");
+
 
 //insert our questions 
 function renderQuestion () {
     var currentQuestion = document.createElement('div');
     currentQuestion.textContent = ourQuestions[questionCounter].question;
+    questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
+    combineAnswers();
     //for loop?  
 
 }
 
-renderQuestion();
+// renderQuestion();
 
 //put correct and incorrect answers together. WARNING: this forces us to use the logic (user selected answer == correct_answer) to check if answer was correct  since incorrect_answer now includes correct_answer 
 function combineAnswers() {
@@ -93,7 +98,7 @@ function combineAnswers() {
 
 }
 
-combineAnswers();
+// combineAnswers();
 
 
 
@@ -129,9 +134,11 @@ function renderPossibleAnswers() {
         answerList.appendChild(answerButtonEl);
     };
 };
-renderPossibleAnswers();
+// renderPossibleAnswers();
 
-startGame = function() {
+
+
+startQuiz = function() {
     questionCounter = 0;
     score = 0;
     // rest of function  
@@ -139,12 +146,14 @@ startGame = function() {
     //fetch api
     fetch(apiUrl).then(function (response) {
         // console.log(response);
+
         if (response.ok) {
             response.json().then(function (data) {
 
-                ourQuestions = data;
+                ourQuestions = data.results;
+                console.log(ourQuestions[0].question);
                 renderQuestion();
-                renderAnswers();
+                renderPossibleAnswers();
 
                 
             });
