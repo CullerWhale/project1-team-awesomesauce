@@ -3,7 +3,19 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
 // 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
+fetch(apiUrl).then(function(response) {
+  // console.log(response);
+  if (response.ok) {
+    response.json().then(function(data){
+      console.log(data);
+    });
+  }
+  else {
 
+  }
+}
+
+)
 
 // var questionEl = document.getElementById("question");
 // const choices = Array.from(document.getElementsByClassName("choice-text"));
