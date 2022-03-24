@@ -1,12 +1,10 @@
-<<<<<<< HEAD
-const questions = 10;
-var apiUrl = 'https://opentdb.com/api.php?amount='+ questions;
+const questionsAPI = 10;
+var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
-'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
-
+// 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
 
-=======
+
 // var questionEl = document.getElementById("question");
 // const choices = Array.from(document.getElementsByClassName("choice-text"));
 // const questionCounterText = document.getElementById('questionCounter');
@@ -145,4 +143,3 @@ document.addEventListener("click", mainClickHandler);
 //constants
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 20;
->>>>>>> develop
