@@ -221,7 +221,7 @@ function renderPossibleAnswers() {
         //create a button for each possible answer 
         var answerButtonEl = document.createElement('button');
         answerButtonEl.className = "choice-text"
-        answerButtonEl.textContent = ourQuestions[questionCounter].incorrect_answers[i];
+        answerButtonEl.innerHTML = ourQuestions[questionCounter].incorrect_answers[i];
         answerList.appendChild(answerButtonEl);
     };
 };
