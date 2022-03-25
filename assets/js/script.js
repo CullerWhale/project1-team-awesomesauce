@@ -14,6 +14,7 @@ var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
 var gifContainerEl = document.querySelector("#gif-page");
 var gifImageEl = document.querySelector('#gifImage');
+var endGameBtn = document.getElementById("end");
 
 
 fetch(giphyUrl).then(function(response) {
@@ -133,7 +134,6 @@ function renderQuestion () {
     // questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
     //for loop?  
-
 }
 
 // renderQuestion();
