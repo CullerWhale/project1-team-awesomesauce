@@ -21,7 +21,8 @@ fetch(giphyUrl).then(function(response) {
     if (response.ok) {
         // var render = response.json();
         response.json().then(function (data) {
-            var render = data.data[0].url; 
+            // we can change the fixed_height to something else depending on how we want the gif to display
+            var render = data.data[0].images.fixed_height.url; 
             console.log(render);
             gifImageEl.src = render;
 
