@@ -1,265 +1,202 @@
-// var questionEl = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-const questionCounterText = document.getElementById('questionCounter');
-const scoreText = document.getElementById('score');
+// create the url that will be used to call Open Trivia DB
+// currently the number of questions is hardcoded to be 10, but this would be changed if we decide to let the user choose parameters.
+const questionsAPI = 10;
+var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
-let currentQuestion = {};
-let acceptingAnswers = false;
-let score = 0;
-let questionCounter = 0;
-let availableQuestions = [];
-
-var ourQuestions = [
-    {question : "Who is the best teacher?", 
-    incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
-    correct_answer : "Rommel Villagomez" }, 
-
-    {question : "Who is the best TA?", 
-    incorrect_answers : ["Arnold Schwarzenegger", "Sylvester Stallone", "Jackie Chan"], 
-    correct_answer : "Colin Goodale" }, 
-
-    {question : "Another question?", 
-    incorrect_answers : ["Yes! Great idea!", "No!", "Maybe"], 
-    correct_answer : "Splunge" } 
+// 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
 
-];
+var ourQuestions = [];
 
-
-
-//Connect to empty question div and answer div
+//Connect to empty divs for the question prompt, answer choices, and the gifs.
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
-var j = 0;
+var gifContainerEl = document.querySelector("#gif-page");
+
+
+
+// var questionEl = document.getElementById("question");
+// const choices = Array.from(document.getElementsByClassName("choice-text"));
+// const questionCounterText = document.getElementById('questionCounter');
+// const scoreText = document.getElementById('score');
+
+// var currentQuestion = {};
+// var acceptingAnswers = false;
+
+// create variable for the running score total
+var score = 0;
+// create variable to track which question we are on
+// this corresponds to the index in the ourQuestions array.
+var questionCounter = 0;
+
+// var availableQuestions = [];
+
+// remove the imageSRC property from this when we add code to call GIPHY API
+// var ourQuestions = [
+//     {question : "Who is the best teacher?", 
+//     incorrect_answers : ["Bruce Willis", "Nicholas Cage", "Michelle Pfeiffer"], 
+//     correct_answer : "Rommel Villagomez",
+//     imageSRC: "./assets/rommel.jpg" }, 
+
+//     {question : "Who is the best TA?", 
+//     incorrect_answers : ["Arnold Schwarzenegger", "Sylvester Stallone", "Jackie Chan"], 
+//     correct_answer : "Colin Goodale",
+//     imageSRC: "./assets/colin.jpg" }, 
+
+//     {question : "Another question?", 
+//     incorrect_answers : ["Yes! Great idea!", "No!", "Maybe"], 
+//     correct_answer : "Splunge",
+//     imageSRC: "./assets/splunge.jpg" } 
+
+
+// ];
+
+// function to handle clicks on the game page (called from event listener at bottom of file)
+mainClickHandler = function(event) {
+    // prevent the click from refreshing the page
+    event.preventDefault();
+
+    // get the target element of the click. This will be used to figure out what needs to be done
+    targetEl = event.target;
+
+    // if the clicked element is an answer choice button, get the text from the button and check the answer
+    // after checking the answer, display the gif page (currently done from the checkAnswer function)
+    if (targetEl.matches(".choice-text")){
+        var answerText = targetEl.textContent;
+        checkAnswer(answerText);
+    }
+    // otherwise, check if the clicked element is the button to go to the next question
+    else if (targetEl.matches(".next-question")) {
+        // increase the question counter by 1 (since we need to go to the next question)
+        questionCounter++;
+        // remove the content from the gifContainer, since we no longer want to display the gif
+        gifContainerEl.innerHTML = "";
+        // if we still have questions left, then render the next question and its answers
+        if (questionCounter < ourQuestions.length) {
+            renderQuestion();
+            renderPossibleAnswers();
+        }
+        // if we ran out of questions, then we need to end the quiz
+        else {
+            // change this part to calling a function to end the quiz
+            console.log("Ending quiz.");
+            gifContainerEl.innerHTML = "We ran out of questions. We don't have an end quiz functionality yet";
+        }
+    }
+}
+
+
 
 //insert our questions 
 function renderQuestion () {
     var currentQuestion = document.createElement('div');
-    currentQuestion.textContent = ourQuestions[j].question;
+    // make the text content of the new div be the question prompt for the current question
+    currentQuestion.innerHTML = ourQuestions[questionCounter].question;
+    // questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
-    //for loop?
-    alert('Good Luck!');    
+    //for loop?  
 
 }
 
-renderQuestion();
-
-
-
-
-//combine incorrect and correct answers on a single basis
-a = ourQuestions[0].correct_answer;
-console.log(a);
-b = ourQuestions[0].incorrect_answers;
-
-c = b.concat([a]);
-console.log(c);
-
-//fail to put that into a loop?
-function possibleAnswers() {
-    for (let i = 0; i < ourQuestions.length; i++) {
-        var correctAnswer = ourQuestions[i].correct_answer;
-        var incorrectAnswer = ourQuestions[i].incorrect_answers;
-        var combinedAnswers = incorrectAnswer.concat([correctAnswer]);
-    
-        // ourQuestions = ourQuestions.concat(combinedAnswers);
-        ourQuestions.concat(combinedAnswers);
-        // console.log(ourQuestions[i]);
-
-        //very close:
-        // var combinedAnswers = ourQuestions[i].correct_answer.concat([ourQuestions[i].incorrect_answers]);
-        // console.log(combinedAnswers)
-    }
-}
-
-// possibleAnswers();
-
+// renderQuestion();
 
 //put correct and incorrect answers together. WARNING: this forces us to use the logic (user selected answer == correct_answer) to check if answer was correct  since incorrect_answer now includes correct_answer 
 function combineAnswers() {
     
     for (let i = 0; i < ourQuestions.length; i++) {
         var incorrectAnswers  = ourQuestions[i].incorrect_answers;
-        // var correctAnswer = ourQuestions[i].correct_answer;
-        // var allAnswers = incorrectAnswers.push(ourQuestions[i].correct_answer);
         incorrectAnswers.push(ourQuestions[i].correct_answer);
         
     }
-    
-    // console.log(allAnswers);
-    // console.log(incorrectAnswers);
-    // console.log(ourQuestions);
 
 }
 
-combineAnswers();
+// combineAnswers();
 
+
+// check if the answer is correct, and go to the gif page
+function checkAnswer(answerText) {
+    if (answerText == ourQuestions[questionCounter].correct_answer) {
+        console.log('question is correct');
+    } else {
+        console.log('question is incorrect');
+    };
+
+    // remove the html for the question prompt and answer choices
+    questions.innerHTML = "";
+    answerList.innerHTML = "";
+    // display the gif in the gifContainer
+    var gifEl = document.createElement('img');
+    // when we are ready to call the GIPHY API, this will need to be changed
+    gifEl.src = ourQuestions[questionCounter].imageSRC;
+    gifContainerEl.appendChild(gifEl);
+
+    // create the button to go to the next question
+    var nextQuestionBtn = document.createElement('button');
+    nextQuestionBtn.className = "next-question"
+    nextQuestionBtn.textContent = 'Next Question';
+    gifContainerEl.appendChild(nextQuestionBtn);
+}
 
 //render answers
 var answerList = document.querySelector("#answers");
 
-//render one answer button
-// var answer1= document.createElement('button');
-// answer1.textContent = ourQuestions[0].incorrect_answers[0]; 
-// answerList.appendChild(answer1);
-// answer1.addEventListener('click', function() {
-//     alert('Success!');
-// });
-
-//global variable for next question
-var lastQuestion = ourQuestions.length - 1;
-// var currerentQuestion = ??? already used. 
-var thisQuestion = 0 ; 
-
 //render possible answers
 function renderPossibleAnswers() {
-    j = 0;
-    for (var i = 0; i < ourQuestions[j].incorrect_answers.length; i++) {
+    for (var i = 0; i < ourQuestions[questionCounter].incorrect_answers.length; i++) {
         //create a button for each possible answer 
-        var answers = document.createElement('button');
-        answers.textContent = ourQuestions[j].incorrect_answers[i];
-        answerList.appendChild(answers);
-
-        answers.addEventListener("click", function () {
-            //check that button works 
-            // alert('Success!');
-            
-            //check if the selected answer was correct. 
-            console.log(this.textContent);
-            // console.log(ourQuestions);
-            if (this.textContent == ourQuestions[j].correct_answer) {
-              console.log('question is correct');
-              var gif = document.createElement('img');
-              gif.src = "./assets/rommel.jpg"
-              document.body.appendChild(gif);
-
-              //go to next question
-              var nextQuestionBtn = document.createElement('button');
-              document.body.appendChild(nextQuestionBtn);
-              nextQuestionBtn.textContent = 'Next Question';
-
-              //add event listener for next question
-              nextQuestionBtn.addEventListener('click', function() {
-                alert('Success!');
-                document.body.removeChild(gif);
-                document.body.removeChild(nextQuestionBtn);
-                document.body.removeChild(answerList);
-                document.body.removeChild(questions);
-                j++;
-                i++;
-                // nextQuestion();
-                var newNextQuestionBtn = document.createElement('div');
-                document.body.appendChild(newNextQuestionBtn);
-                newNextQuestionBtn.textContent = ourQuestions[j].question;
-
-                if (ourQuestions < lastQuestion) {
-                    thisQuestion++; 
-                    
-                    // nextQuestion();
-                    // renderQuestion(); not hooked up to lastQuestion
-                }
-                var next = document.createElement('button');
-                next.textContent = 'test';
-                // next.textContent = ourQuestions[j].incorrect_answers[i];
-                answerList.appendChild(next);
-                //new attempt
-
-
-
-
-
-
-
-            
-
-                //new attempt
-
-                // f(x)? renderquestion
-                let q = ourQuestions[thisQuestion];
-
-                // how?! nextQuestion();
-                
-                // how?! renderQuestion(j);
-
-                //Fail
-                // var newQuestion = document.createElement('div');
-                // newQuestion.textContent = ourQuestions[i].question;
-                // questions.appendChild(newQuestion);
-              });
-              
-            } 
-        });
+        var answerButtonEl = document.createElement('button');
+        answerButtonEl.className = "choice-text"
+        answerButtonEl.textContent = ourQuestions[questionCounter].incorrect_answers[i];
+        answerList.appendChild(answerButtonEl);
     };
 };
-renderPossibleAnswers();
+// renderPossibleAnswers();
 
 
-
-
-
-//redo
-
-//Connect to empty question div and answer div
-var questions = document.querySelector("#question");
-var possibleAnswers = document.querySelector("#answers");
-// var j = 0;
-
-
-function nextQuestion(j) {
-    for (var i = 0; i < ourQuestions[j].incorrect_answers.length; i++) {
-        //create a button for each possible answer 
-        var answers = document.createElement('button');
-        answers.textContent = ourQuestions[j].incorrect_answers[i];
-        answerList.appendChild(answers);
-
-        
-//one way to insert our question
-    // var currentQuestion = document.createElement('div');
-    // currentQuestion.textContent = ourQuestions[j].question;
-    // questions.appendChild(currentQuestion);
-
-
-}
-
-
-//loop through questions fail 
-
-// console.log(ourQuestions);
-// function nextQuestion() {
-//     console.log(ourQuestions.length);
-
-
-//     for (let i = 0; i < ourQuestions.length; i++) {
-//         const currentQuestion = ourQuestions[i+1];
-        //HOW?! renderQuestion();
-
-        // var nextQuestion = document.createElement('div');
-        // nextQuestion.textContent = ourQuestions[j].question;
-        // questions.appendChild(nextQuestion);
-}
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-startGame = () => {
+// start the quiz
+startQuiz = function() {
+    // just in case, reset the values of the question counter and the score
     questionCounter = 0;
     score = 0;
-   // rest of function  
-  //   getNewQuestion();
-      renderQuestion();
-      renderAnswers();
-      
-  };
+    // rest of function  
 
+    //fetch api
+    fetch(apiUrl).then(function (response) {
+        // console.log(response);
+
+        if (response.ok) {
+            response.json().then(function (data) {
+
+                ourQuestions = data.results;
+                console.log(ourQuestions[0].question);
+                // add the correct answer to the list of incorrect answers for easier display
+                combineAnswers();
+                // render the first question and its possible answers
+                renderQuestion();
+                renderPossibleAnswers();
+
+                
+            });
+        }
+        else {
+
+        }
+    }
+
+    )
+
+
+  //   getNewQuestion();
+      
+      
+};
+
+// start the quiz when this file is loaded (note that this file is not connected to index.html)
+startQuiz();
+
+// event listener for all clicks on the page
+document.addEventListener("click", mainClickHandler);
 
 
 // older work 
@@ -268,45 +205,3 @@ startGame = () => {
 //constants
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 20;
-
-var checkAnswer = function(answer) {
-  if (answer == "3") {}
-};
-
-
-// getNewQuestion = () => {
-
-//   if(availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS){
-//     localStorage.setItem("mostRecentScore", score);
-//     // go to end of page
-//     //return window.location.assign('./end.html');
-//   }
-//   questionCounter++;
-//   questionCounterText.innerHTML = `${questionCounter}/${MAX_QUESTIONS}`;
-// // rest of function
-//   acceptingAnswers = true;
-// };
-
-// choices.forEach(choice => {
-//   choice.addEventListener('click', e => {
-//     if(!acceptingAnswers) return;
-
-//     acceptingAnswers = false;
-//     const selectedChoice = e.target;
-//     const selectedAnswer = selectedChoice.dataset["number"];
-
-//     // finish function, include if below
-//     if (classToApply === "correct") {
-//       incrementScore(CORRECT_BONUS);
-//     }
-
-//     getNewQuestion();
-//   });
-// });
-
-// incrementScore = num => {
-//   score += num;
-//   scoreText.innerHTML = score;
-// }
-
-// startGame();
