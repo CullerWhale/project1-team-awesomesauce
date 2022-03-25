@@ -5,9 +5,9 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
 // 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
-var giphyTerm = 'ryan+gosling'
+// var giphyTerm = 'ryan+gosling'
 
-var giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + giphyTerm + "&api_key=XHlbLemqPzGoiaILFj0ZpJCpHAibx6cT&limit=1"
+// var giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + giphyTerm + "&api_key=XHlbLemqPzGoiaILFj0ZpJCpHAibx6cT&limit=1"
 
 //Connect to empty divs for the question prompt, answer choices, and the gifs.
 var questions = document.querySelector("#question");
@@ -16,25 +16,25 @@ var gifContainerEl = document.querySelector("#gif-page");
 var gifImageEl = document.querySelector('#gifImage');
 
 
-fetch(giphyUrl).then(function(response) {
-    // console.log(response);
-    if (response.ok) {
-        // var render = response.json();
-        response.json().then(function (data) {
-            // we can change the fixed_height to something else depending on how we want the gif to display
-            var render = data.data[0].images.fixed_height.url; 
-            console.log(render);
-            gifImageEl.src = render;
+// fetch(giphyUrl).then(function(response) {
+//     // console.log(response);
+//     if (response.ok) {
+//         // var render = response.json();
+//         response.json().then(function (data) {
+//             // we can change the fixed_height to something else depending on how we want the gif to display
+//             var render = data.data[0].images.fixed_height.url; 
+//             console.log(render);
+//             gifImageEl.src = render;
 
-        })
+//         })
         
-        // console.log(response.json());
-        // gifImageEl.src = response.url.textContent;
+//         // console.log(response.json());
+//         // gifImageEl.src = response.url.textContent;
 
-    }
+//     }
 
 
-})
+// });
 
 
 // if (response.ok) {
@@ -152,23 +152,55 @@ function combineAnswers() {
 
 // combineAnswers();
 
+//Function to display giphy 
+
+function renderGiphy (giphyUrl) {
+    fetch(giphyUrl).then(function(response) {
+        // console.log(response);
+        if (response.ok) {
+            // var render = response.json();
+            response.json().then(function (data) {
+                // we can change the fixed_height to something else depending on how we want the gif to display
+                var render = data.data[0].images.fixed_height.url; 
+                console.log(render);
+                gifImageEl.src = render;
+
+                
+    
+            })
+            
+            // console.log(response.json());
+            // gifImageEl.src = response.url.textContent;
+    
+        }
+    
+    
+    });
+}
 
 // check if the answer is correct, and go to the gif page
 function checkAnswer(answerText) {
     if (answerText == ourQuestions[questionCounter].correct_answer) {
         console.log('question is correct');
+        
     } else {
         console.log('question is incorrect');
     };
+
+    
+    giphyTerm = ourQuestions[questionCounter].correct_answer;
+    var giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + giphyTerm + "&api_key=XHlbLemqPzGoiaILFj0ZpJCpHAibx6cT&limit=1"
+    console.log (giphyUrl);
+    renderGiphy(giphyUrl);
 
     // remove the html for the question prompt and answer choices
     questions.innerHTML = "";
     answerList.innerHTML = "";
     // display the gif in the gifContainer
-    var gifEl = document.createElement('img');
-    // when we are ready to call the GIPHY API, this will need to be changed
-    gifEl.src = ourQuestions[questionCounter].imageSRC;
-    gifContainerEl.appendChild(gifEl);
+    // var gifEl = document.createElement('img');
+    // // when we are ready to call the GIPHY API, this will need to be changed
+    // gifEl.src = ourQuestions[questionCounter].imageSRC;
+    // gifContainerEl.appendChild(gifEl);
 
     // create the button to go to the next question
     var nextQuestionBtn = document.createElement('button');
