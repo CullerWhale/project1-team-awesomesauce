@@ -5,13 +5,51 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
 // 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
+var giphyTerm = 'ryan+gosling'
 
-var ourQuestions = [];
+var giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + giphyTerm + "&api_key=XHlbLemqPzGoiaILFj0ZpJCpHAibx6cT&limit=1"
 
 //Connect to empty divs for the question prompt, answer choices, and the gifs.
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
 var gifContainerEl = document.querySelector("#gif-page");
+var gifImageEl = document.querySelector('#gifImage');
+
+
+fetch(giphyUrl).then(function(response) {
+    // console.log(response);
+    if (response.ok) {
+        // var render = response.json();
+        response.json().then(function (data) {
+            var render = data.data[0].url; 
+            console.log(render);
+            gifImageEl.src = render;
+
+        })
+        
+        // console.log(response.json());
+        // gifImageEl.src = response.url.textContent;
+
+    }
+
+
+})
+
+
+// if (response.ok) {
+//             response.json().then(function (data) {
+
+//                 ourQuestions = data.results;
+//                 console.log(ourQuestions[0].question);
+//                 // add the correct answer to the list of incorrect answers for easier display
+//                 combineAnswers();
+//                 // render the first question and its possible answers
+//                 renderQuestion();
+//                 renderPossibleAnswers();
+
+var ourQuestions = [];
+
+
 
 
 
@@ -161,7 +199,9 @@ startQuiz = function() {
     score = 0;
     // rest of function  
 
-    //fetch api
+    
+    
+    //fetch OpenTDB api
     fetch(apiUrl).then(function (response) {
         // console.log(response);
 
