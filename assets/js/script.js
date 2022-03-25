@@ -13,7 +13,7 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
 var gifContainerEl = document.querySelector("#gif-page");
-var gifImageEl = document.querySelector('#gifImage');
+// var gifImageEl = document.querySelector('#gifImage');
 
 
 // fetch(giphyUrl).then(function(response) {
@@ -155,6 +155,9 @@ function combineAnswers() {
 //Function to display giphy 
 
 function renderGiphy (giphyUrl) {
+    var gifImageEl = document.createElement("img");
+    gifContainerEl.appendChild(gifImageEl);
+    
     fetch(giphyUrl).then(function(response) {
         // console.log(response);
         if (response.ok) {
