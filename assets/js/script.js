@@ -80,7 +80,7 @@ mainClickHandler = function(event) {
         else {
             // change this part to calling a function to end the quiz
             console.log("Ending quiz.");
-            gifContainerEl.innerHTML = "We ran out of questions. We don't have an end quiz functionality yet";
+            saveHighScore();
         }
     }
 }
