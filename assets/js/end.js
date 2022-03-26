@@ -27,6 +27,10 @@ saveHighScore = function(event) {
 
   localStorage.setItem('highScores', JSON.stringify(highScores));
   // window.location.assign('./highscores.html');
+//put highscore JS content here??
+
   document.location.href = "./highscores.html";
 };
+
+
 
