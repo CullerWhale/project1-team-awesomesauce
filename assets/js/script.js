@@ -101,7 +101,7 @@ mainClickHandler = function(event) {
     // if the clicked element is an answer choice button, get the text from the button and check the answer
     // after checking the answer, display the gif page (currently done from the checkAnswer function)
     if (targetEl.matches(".choice-text")){
-        var answerText = targetEl.textContent;
+        var answerText = targetEl.innerHTML;
         checkAnswer(answerText);
     }
     // otherwise, check if the clicked element is the button to go to the next question
@@ -110,6 +110,7 @@ mainClickHandler = function(event) {
         questionCounter++;
         // remove the content from the gifContainer, since we no longer want to display the gif
         gifContainerEl.innerHTML = "";
+        correctTextEl.innerHTML = "";
         // if we still have questions left, then render the next question and its answers
         if (questionCounter < ourQuestions.length) {
             renderQuestion();
@@ -175,21 +176,24 @@ function renderGiphy (giphyUrl) {
             // console.log(response.json());
             // gifImageEl.src = response.url.textContent;
     
+        }else{
+            console.log(response);
         }
-    
+        
     
     });
 }
 
+var correctTextEl = document.getElementById("correct-text");
+
 // check if the answer is correct, and go to the gif page
 function checkAnswer(answerText) {
     if (answerText == ourQuestions[questionCounter].correct_answer) {
-        console.log('question is correct');
-        
+        console.log('question is correct');  
     } else {
         console.log('question is incorrect');
     };
-
+    correctTextEl.innerHTML = "The correct answer was " + ourQuestions[questionCounter].correct_answer;
     
     giphyTerm = ourQuestions[questionCounter].correct_answer;
     var giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + giphyTerm + "&api_key=XHlbLemqPzGoiaILFj0ZpJCpHAibx6cT&limit=1"
