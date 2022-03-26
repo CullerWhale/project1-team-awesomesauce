@@ -11,6 +11,8 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
 //Connect to empty divs for the question prompt, answer choices, and the gifs.
 var questions = document.querySelector("#question");
+// questions.style.cssText = 'width:100vw;height:25vh; display:flex;justify-content:center;align-items:center;max-width:80rem;margin:0 auto;border-radius:45px;font-size:2.5rem;'
+
 var possibleAnswers = document.querySelector("#answers");
 var gifContainerEl = document.querySelector("#gif-page");
 // var gifImageEl = document.querySelector('#gifImage');
@@ -224,6 +226,7 @@ function checkAnswer(answerText) {
 
 //render answers
 var answerList = document.querySelector("#answers");
+// answerList.style.cssText = 'padding: 1.5rem 2.5rem;background-color: var(--primary);color:rgb(44, 43, 43);justify-content:center; align-items:center; border-radius:45px; answers:hover cursor:pointer; box-shadow:0 0.4rem 1.4rem rgb(44, 43, 43); transform:translateY(-0.1rem);transition: transform 150ms';
 
 //render possible answers
 function renderPossibleAnswers() {
