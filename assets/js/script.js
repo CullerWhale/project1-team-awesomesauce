@@ -13,12 +13,7 @@ var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
 var gifContainerEl = document.querySelector("#gif-page");
-<<<<<<< HEAD
-var gifImageEl = document.querySelector('#gifImage');
-var endGameBtn = document.getElementById("end");
-=======
 // var gifImageEl = document.querySelector('#gifImage');
->>>>>>> e4779d990a5e419ada2d1341d0c87e260a6e4bde
 
 
 // fetch(giphyUrl).then(function(response) {
