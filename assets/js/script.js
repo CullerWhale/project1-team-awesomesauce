@@ -1,6 +1,6 @@
 // create the url that will be used to call Open Trivia DB
 // currently the number of questions is hardcoded to be 10, but this would be changed if we decide to let the user choose parameters.
-const questionsAPI = 10;
+const questionsAPI = 2;
 var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
 
 // 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
@@ -92,8 +92,6 @@ var questionCounter = 0;
 
 // function to handle clicks on the game page (called from event listener at bottom of file)
 mainClickHandler = function(event) {
-    // prevent the click from refreshing the page
-    event.preventDefault();
 
     // get the target element of the click. This will be used to figure out what needs to be done
     targetEl = event.target;
@@ -120,7 +118,7 @@ mainClickHandler = function(event) {
         else {
             // change this part to calling a function to end the quiz
             console.log("Ending quiz.");
-            gifContainerEl.innerHTML = "We ran out of questions. We don't have an end quiz functionality yet";
+            saveHighScore();
         }
     }
 }
@@ -135,7 +133,6 @@ function renderQuestion () {
     // questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
     //for loop?  
-
 }
 
 // renderQuestion();
@@ -209,11 +206,20 @@ function checkAnswer(answerText) {
     // gifEl.src = ourQuestions[questionCounter].imageSRC;
     // gifContainerEl.appendChild(gifEl);
 
-    // create the button to go to the next question
-    var nextQuestionBtn = document.createElement('button');
-    nextQuestionBtn.className = "next-question"
-    nextQuestionBtn.textContent = 'Next Question';
-    gifContainerEl.appendChild(nextQuestionBtn);
+    if (questionCounter < ourQuestions.length - 1) {
+        // create the button to go to the next question
+        var nextQuestionBtn = document.createElement('button');
+        nextQuestionBtn.className = "next-question"
+        nextQuestionBtn.textContent = 'Next Question';
+        gifContainerEl.appendChild(nextQuestionBtn);
+    }
+    else {
+        var endScreenLinkEl = document.createElement('a');
+        endScreenLinkEl.className = "btn";
+        endScreenLinkEl.setAttribute("href", "./end.html");
+        endScreenLinkEl.textContent = "End quiz"
+        gifContainerEl.appendChild(endScreenLinkEl);
+    }
 }
 
 //render answers
