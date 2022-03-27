@@ -1,4 +1,5 @@
 
+
 M.AutoInit();
 
 
@@ -21,3 +22,4 @@ for (let index = 0 ; index < 24; index++) {
     
     numberOfCategories++;
 }
+
