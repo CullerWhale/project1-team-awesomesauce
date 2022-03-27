@@ -12,7 +12,7 @@ console.log(highScores);
 
 var MAX_HIGH_SCORES = 5;
 
-finalScore.innerText = mostRecentScore;
+finalScore.innerText = "Final Score: " + mostRecentScore;
 
 saveHighScore = function(event) {
   event.preventDefault();

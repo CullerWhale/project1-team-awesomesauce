@@ -5,6 +5,8 @@
 // currently the number of questions is hardcoded to be 10, but this would be changed if we decide to let the user choose parameters.
 const questionsAPI = 2;
 
+const CORRECT_BONUS = 10;
+
 var categorySelection = localStorage.getItem('categoryNumber'); 
 var apiUrl = 'https://opentdb.com/api.php?amount=' + questionsAPI + "&category=" + categorySelection;
 //try template literal
@@ -117,18 +119,9 @@ mainClickHandler = function(event) {
         gifContainerEl.innerHTML = "";
         correctTextEl.innerHTML = "";
         // if we still have questions left, then render the next question and its answers
-        if (questionCounter < ourQuestions.length) {
-            renderQuestion();
-            renderPossibleAnswers();
-        }
-        // if we ran out of questions, then we need to end the quiz
-        else {
-            // change this part to calling a function to end the quiz
-            console.log("Ending quiz.");
+        renderQuestion();
+        renderPossibleAnswers();
 
-            saveHighScore();
-
-        }
     }
 }
 
@@ -196,7 +189,9 @@ var correctTextEl = document.getElementById("correct-text");
 // check if the answer is correct, and go to the gif page
 function checkAnswer(answerText) {
     if (answerText == ourQuestions[questionCounter].correct_answer) {
-        console.log('question is correct');  
+        console.log('question is correct');
+        score += CORRECT_BONUS;
+        localStorage.setItem("mostRecentScore", score);  
     } else {
         console.log('question is incorrect');
     };
@@ -299,7 +294,4 @@ document.addEventListener("click", mainClickHandler);
 // older work 
 
 
-//constants
-const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 20;
 
