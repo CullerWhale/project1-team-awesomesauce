@@ -1,7 +1,14 @@
+
+// import {categorySelection} from "./script.js";
+
 // create the url that will be used to call Open Trivia DB
 // currently the number of questions is hardcoded to be 10, but this would be changed if we decide to let the user choose parameters.
 const questionsAPI = 2;
-var apiUrl = 'https://opentdb.com/api.php?amount='+ questionsAPI;
+
+var categorySelection = localStorage.getItem('categoryNumber'); 
+var apiUrl = 'https://opentdb.com/api.php?amount=' + questionsAPI + "&category=" + categorySelection;
+//try template literal
+
 
 // 'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple'
 
@@ -118,7 +125,9 @@ mainClickHandler = function(event) {
         else {
             // change this part to calling a function to end the quiz
             console.log("Ending quiz.");
+
             saveHighScore();
+
         }
     }
 }
@@ -133,6 +142,7 @@ function renderQuestion () {
     // questions=document.querySelector('#question');
     questions.appendChild(currentQuestion);
     //for loop?  
+
 }
 
 // renderQuestion();
@@ -220,6 +230,7 @@ function checkAnswer(answerText) {
         endScreenLinkEl.textContent = "End quiz"
         gifContainerEl.appendChild(endScreenLinkEl);
     }
+
 }
 
 //render answers
@@ -291,3 +302,4 @@ document.addEventListener("click", mainClickHandler);
 //constants
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 20;
+

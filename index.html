@@ -6,19 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link type="text/css" rel="stylesheet" href="./assets/css/materialize.min.css"  media="screen,projection"/>
 </head>
 
- <!-- current class names are placeholders and will be changed -->
 <body>
     <div class="container">
         <section id="home" class="flex-center flex-column">
           <h1>Trivia Time!</h1>
           <p>The enthusiasm and confidence you bring to Trivia Games is rivaled only by the impressive consistency with which you are always wrong. Lol, do you have what it takes to win? Click Start to find out!</p>
+          <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Select Category</a>
+            <ul id='dropdown1' class='dropdown-content'>
+              <li value = '9'>One</li>
+
+              <li value="10">Two</li>
+
+              <li value = "11" >Three </li>
+
+
+              <!-- <li><a href="#!10">two</a></li>
+              <li><a href="#!11">three</a></li>
+              <li><a href="#!12">Four</a></li>
+              <li><a href="#!13">five</a></li>
+              <li><a href="#!14">six</a></li> -->
+            </ul>
           <a class="btn" id="start-quiz" href="./game.html">Start Quiz</a>
           <a class="btn" href="./highscores.html" >View high scores</a>
         </section>
     </div>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <!-- <script src="./assets/js/script.js"></script> -->
+    <script src="./assets/js/materialize.min.js"></script>
+    <script src="./assets/js/script.js"></script>
     </body>
     </html>
