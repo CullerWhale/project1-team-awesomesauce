@@ -18,7 +18,7 @@ saveHighScore = function(event) {
   event.preventDefault();
   console.log("clicked the save");
   var score = {
-    score: Math.floor(Math.random() * 100),
+    score: mostRecentScore,
     name: username.value
   };
   highScores.push(score);
