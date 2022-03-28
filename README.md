@@ -10,6 +10,8 @@ HTML, JavaScript, CSS, MaterializeCSS, jQuery, Open Trivia DB API, GIPHY API
 # Link to deployed application:
 https://cullerwhale.github.io/project1-team-awesomesauce/
 
+# Image of website:
+![Image of Website](assets/images/image-of-website.png)
 
 
 # Created by:
