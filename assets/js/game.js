@@ -11,6 +11,7 @@ var apiUrl = 'https://opentdb.com/api.php?amount=' + questionsAPI + "&category="
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
 var gifContainerEl = document.querySelector("#gif-page");
+var giphyAttributionEl = document.querySelector("#giphy-attribution");
 
 var ourQuestions = [];
 
@@ -40,6 +41,7 @@ mainClickHandler = function(event) {
         // remove the content from the gifContainer, since we no longer want to display the gif
         gifContainerEl.innerHTML = "";
         correctTextEl.innerHTML = "";
+        giphyAttributionEl.className = "hidden";
         // if we still have questions left, then render the next question and its answers
         renderQuestion();
         renderPossibleAnswers();
@@ -49,6 +51,7 @@ mainClickHandler = function(event) {
 //insert our questions 
 function renderQuestion () {
     var currentQuestion = document.createElement('div');
+    currentQuestion.className = "question-prompt";
     // make the text content of the new div be the question prompt for the current question
     currentQuestion.innerHTML = ourQuestions[questionCounter].question;
     // questions=document.querySelector('#question');
@@ -105,6 +108,8 @@ function checkAnswer(answerText) {
     var giphyUrl = "https://api.giphy.com/v1/gifs/search?q=" + giphyTerm + "&api_key=XHlbLemqPzGoiaILFj0ZpJCpHAibx6cT&limit=1"
     console.log (giphyUrl);
     renderGiphy(giphyUrl);
+
+    giphyAttributionEl.className = "";
 
     // remove the html for the question prompt and answer choices
     questions.innerHTML = "";
