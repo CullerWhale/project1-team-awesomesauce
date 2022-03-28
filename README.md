@@ -13,9 +13,9 @@ https://cullerwhale.github.io/project1-team-awesomesauce/
 
 
 # Created by:
-Cullen Harris
-Patrick Quirk
-Kathy Wimbish
+Cullen Harris, 
+Patrick Quirk, 
+Kathy Wimbish, 
 Cody Brice
 
 
