@@ -5,8 +5,10 @@ const questionsAPI = 10;
 const CORRECT_BONUS = 10;
 
 var categorySelection = localStorage.getItem('categoryNumber'); 
-var apiUrl = 'https://opentdb.com/api.php?amount=' + questionsAPI + "&category=" + categorySelection;
-
+var apiUrl = 'https://opentdb.com/api.php?amount=' + questionsAPI;
+if (categorySelection) {
+    apiUrl += "&category=" + categorySelection;
+};
 //Connect to empty divs for the question prompt, answer choices, and the gifs.
 var questions = document.querySelector("#question");
 var possibleAnswers = document.querySelector("#answers");
