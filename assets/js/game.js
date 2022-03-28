@@ -33,6 +33,7 @@ mainClickHandler = function(event) {
     if (targetEl.matches(".choice-text")){
         var answerText = targetEl.innerHTML;
         checkAnswer(answerText);
+
     }
     // otherwise, check if the clicked element is the button to go to the next question
     else if (targetEl.matches(".next-question")) {
@@ -41,6 +42,7 @@ mainClickHandler = function(event) {
         // remove the content from the gifContainer, since we no longer want to display the gif
         gifContainerEl.innerHTML = "";
         correctTextEl.innerHTML = "";
+        correctTextEl.className = "hidden";
         giphyAttributionEl.className = "hidden";
         // if we still have questions left, then render the next question and its answers
         renderQuestion();
@@ -102,6 +104,9 @@ function checkAnswer(answerText) {
     } else {
         console.log('question is incorrect');
     };
+
+    correctTextEl.className = '';
+
     correctTextEl.innerHTML = "The correct answer was " + ourQuestions[questionCounter].correct_answer;
     
     giphyTerm = ourQuestions[questionCounter].correct_answer;

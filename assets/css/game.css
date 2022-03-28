@@ -5,7 +5,7 @@
   background-color: var(--tertiary);
   border: 3px solid var(--primary);
   border-radius: 45px;
-  font-size: 30px;
+  font-size: large;
   text-align: center;
 }
 
@@ -15,7 +15,7 @@
   display: flex;
   margin-bottom: 0.5rem;
   width: 100%;
-  font-size: 1.8rem;  
+  font-size: large;  
 }
 
 .choice-text:hover {
@@ -32,15 +32,17 @@
   background-color: var(--tertiary);
   border: 3px solid var(--primary);
   border-radius: 45px;
+  font-size: large;
 }
 
-.correct-text {
+#correct-text {
   padding: 1.5rem;
   width: 100%;
   color: rgb(44, 43, 43);
   background-color: var(--tertiary);
   border: 3px solid var(--primary);
   border-radius: 45px;
+  font-size: large;
 }
 
 .next-question {
@@ -50,6 +52,7 @@
   background-color: var(--tertiary);
   border: 3px solid var(--primary);
   border-radius: 45px;
+  font-size: large;
 }
 
 .next-question:hover {
